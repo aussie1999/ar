@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Deomo: Vision Based AR using AR.js</title>
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/jeromeetienne/AR.js/2.0.8/aframe/build/aframe-ar.js"></script>
+  </head>
+  <body>
+    <a-scene vr-mode-ui="enabled: false" embedded arjs>
+      <a-entity gltf-model="https://modelviewer.dev/shared-assets/models/Astronaut.glb" gps-entity-place="latitude: 35.715379; longitude: 139.712610;"/>
+      <!-- <a-entity gltf-model="https://modelviewer.dev/shared-assets/models/Astronaut.glb" gps-entity-place="latitude:35.71533108434381; longitude:139.71293722881634;"/> -->
+      <!-- <a-entity gltf-model="https://modelviewer.dev/shared-assets/models/Astronaut.glb" gps-entity-place="latitude:35.7151481523922; longitude:139.71291577114494 ;"/> -->
+      <!-- <a-entity gltf-model="https://modelviewer.dev/shared-assets/models/Astronaut.glb" gps-entity-place="latitude:35.715104597103746; longitude:139.7124705244636;"/> -->
+      <!-- <a-entity gltf-model="https://modelviewer.dev/shared-assets/models/Astronaut.glb" gps-entity-place="latitude:35.71513508580818; longitude:139.71222376124263;"/> -->
+      <!-- <a-entity gltf-model="https://modelviewer.dev/shared-assets/models/Astronaut.glb" gps-entity-place="latitude35.71546174976641; longitude:139.71215938822846;"/> -->
+	  
+      <a-camera gps-camera rotation-reader></a-camera>
+    </a-scene>
+  </body>
+</html>

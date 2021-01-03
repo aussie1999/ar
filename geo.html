@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Digick AR</title>
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar-nft.js"></script>
+    <style>
+      #info {
+        position: fixed;
+        z-index: 10000;
+        background-color: #fff;
+        padding: 10px;
+        top: 0;
+        left: 0;
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body style="margin: 0; overflow: hidden;">
+    <div id="info">infomation</div>
+    <a-scene
+      vr-mode-ui="enabled: false"
+      embedded
+      arjs="sourceType: webcam; debugUIEnabled: false;"
+    >
+	<!-- DOCS https://ar-js-org.github.io/AR.js-Docs/location-based/#gps-camera -->
+	<a-camera
+		id='camera1'
+		look-controls-enabled='false'
+		arjs-look-controls='smoothingFactor: 0.1'
+		gps-camera='gpsMinDistance: 5' 
+		rotation-reader
+	></a-camera> 	
+	<!-- gpsMinDistance - GPS更新イベントの発生をメートル単位で制御 -->
+	<!-- rotation-reader - 回転イベントを処理するrotation-reader -->
+
+
+	<a-box
+		id="box1"
+		material="color: red"
+		gps-entity-place="latitude: 35.716059289187434; longitude: 139.7131831523034;"
+		scale="5 5 5"
+	></a-box>
+
+	<a-text
+		id="text"
+		value="measuring"
+		look-at="[gps-camera]"
+		scale="30 30 30"
+		position="0 40 -10"
+		gps-entity-place="latitude: 35.716059289187434; longitude: 139.7131831523034;"
+	></a-text>
+	
+	<a-entity gltf-model="Astronaut.glb" gps-entity-place="latitude: 35.715379; longitude: 139.712610;"/>
+
+
+    </a-scene>
+    <script>
+      window.addEventListener('load', () => {
+
+        const text = document.getElementById('text');
+        const box1 = document.getElementById('box1');
+		var addr = window.prompt();
+		var gep = addr.split(',');
+		text.setAttribute('gps-entity-place','latitude:'+gep[0]+'; longitude:'+gep[1]+';');
+		box1.setAttribute('gps-entity-place','latitude:'+gep[0]+'; longitude:'+gep[1]+';');
+        text.addEventListener('gps-entity-place-update-positon', (event) => {
+          document.getElementById('info').textContent = text.getAttribute('distance')+'to go';
+          text.setAttribute('value', text.getAttribute('distanceMsg') + ' left');
+        });
+      });
+    </script>
+  </body>
+</html>
